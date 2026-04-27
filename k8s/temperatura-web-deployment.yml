@@ -44,7 +44,7 @@ spec:
       containers:
       - name: temperaturas-frontend
       # Imagen Docker que se desplegará en el contenedor
-        image: pcaamano/aa2-temperatura-front:00
+        image: pcaamano/aa2-temperatura-front:01
         env:
         - name: TEMP_SERVER
           value: "temperatura-api-svc:5000"
