@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 env:
 # Nombre del cluster EKS y región de AWS
-  EKS_CLUSTER_NAME: cluster-temperatura
+  EKS_CLUSTER_NAME: aa2-cluster-temperatura
   AWS_REGION: us-east-1
 
 jobs:
@@ -34,17 +34,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
- # Cuarto paso: permite darle nombre al contenedor, por eso podemos usar el mismo nombre para el backend y frontend, pero con etiquetas diferentes
+ # Cuarto paso: genera el nombre y las etiquetas de la imagen Docker que se publicará en docker hub.
  # Latest=true es la etiqueta que identifica la versión más reciente de la imagen, y value=latest es una etiqueta personalizada que también indica que esta es la versión más reciente de la imagen.       
     - name: Docker Metadata for Image
       id: docker_meta_backend
       uses: docker/metadata-action@v5
       with:
-        images: pcaamano/temperaturas-backend
+        images: pcaamano/aa2-temperatura-back
         flavor: |
           latest=false
         tags: |
-          type=raw,value=01
+          type=raw,value=00
 
 # Quinto paso: permite construir el contenedor y enviarlo a Docker hub. Context es la carpeta donde se encuentra el Dockerfile, en este caso ./backend. 
     - name: Build and Push Backend to Docker Hub
@@ -63,11 +63,11 @@ jobs:
       id: docker_meta_frontend
       uses: docker/metadata-action@v5
       with:
-        images: pcaamano/temperaturas-frontend
+        images: pcaamano/aa2-temperatura-front
         flavor: |
           latest=false
         tags: |
-          type=raw,value=01
+          type=raw,value=00
 
     - name: Build and Push Frontend to Docker Hub
       id: docker_build_frontend
